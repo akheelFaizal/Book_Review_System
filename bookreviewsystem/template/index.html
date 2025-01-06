@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	{% load static %}
+	<title>BookSaw - Free Book Store HTML CSS Template</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'icomoon/icomoon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/vendor.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+	<style>
+		.social-links ul li:hover{
+			transform:translateY(-5px);
+			transition:0.2s;
+		}
+		.social-links ul li{
+			transition:0.2s;
+		}
+		#rev{
+			border-radius: 30px;
+			transition: 0.3s;
+		}
+		#rev:hover{
+			transition: 0.3s;
+			z-index: 500;
+			background: #e6c697 !important;
+		}
+	</style>
+
+
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+
+	<div id="header-wrap">
+
+		<div class="top-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="social-links">
+							<ul>
+								<li>
+									<a href="#"><i class="icon icon-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-youtube-play"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-behance-square"></i></a>
+								</li>
+							</ul>
+						</div><!--social-links-->
+					</div>
+					<div class="col-md-6">
+						<div class="right-element">
+
+							<div class="action-menu">
+
+								<div class="search">
+<!--									<form method="GET" action="" style="display: contents;margin:0;">-->
+										{% csrf_token %}
+										<input type="search" name="" placeholder="Search User">
+										<a href="log"><button style="height:44px;position:relative;top:-2px;" class="btn btn-primary m-0" type="submit">Search</button></a>
+<!--									</form>-->
+								</div>
+							</div>
+
+						</div><!--top-right-->
+					</div>
+
+				</div>
+			</div>
+		</div><!--top-content-->
+
+		<header id="header">
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-md-2">
+						<div class="main-logo">
+							<a href="index.html"><img src="{% static 'images/main-logo.png' %}" alt="logo"></a>
+						</div>
+
+					</div>
+
+					<div class="col-md-10">
+
+						<nav id="navbar">
+							<div class="main-menu stellarnav">
+								<ul class="menu-list">
+									<li class="menu-item active"><a href="#home">Home</a></li>
+									<li class="menu-item"><a href="#featured-books" class="nav-link">All Books</a></li>
+									<li class="menu-item"><a href="#top_rated" class="nav-link">Top Rated</a></li>
+									<li class="menu-item"><a href="#Reviews" class="nav-link">Reviews</a></li>
+									<li class="menu-item"><a href="log" class="nav-link">Library</a></li>
+									<li class="menu-item"><a href="log" class="nav-link">LOGIN</a></li>
+								</ul>
+
+								<div class="hamburger">
+									<span class="bar"></span>
+									<span class="bar"></span>
+									<span class="bar"></span>
+								</div>
+
+							</div>
+						</nav>
+
+					</div>
+
+				</div>
+			</div>
+		</header>
+
+	</div><!--header-wrap-->
+
+	<section id="billboard">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<button class="prev slick-arrow">
+						<i class="icon icon-arrow-left"></i>
+					</button>
+
+					<div class="main-slider pattern-overlay">
+						{% for book in carousel_books %}
+						<div class="slider-item">
+							<div class="banner-content">
+								<h2 class="banner-title">{{book.title}}</h2>
+								<p style="text-align: justify;height:250px;width:400px;   display: -webkit-box;
+									-webkit-box-orient: vertical;-webkit-line-clamp: 6;overflow: hidden;text-overflow: ellipsis;
+  									max-height: calc(2.2em * 5);line-height: 1.8em;">{{book.description}}</p>
+								<div class="btn-wrap">
+									<a href="addtolib/{{book.id}}" class="btn btn-outline-accent btn-accent-arrow">Add To List<i
+												class="icon icon-ns-arrow-right"></i></a>
+								</div>
+							</div><!--banner-content-->
+							<img src="{{book.book_photo.url}}" alt="banner" class="banner-image" style="width: 400px;height: 593px;">
+						</div><!--slider-item-->
+						{% endfor %}
+
+					</div><!--slider-->
+
+					<button class="next slick-arrow">
+						<i class="icon icon-arrow-right"></i>
+					</button>
+
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<section id="client-holder" data-aos="fade-up">
+		<div class="container">
+			<div class="row">
+				<div class="inner-content">
+					<div class="logo-wrap">
+						<div class="grid">
+							<a href="#"><img src="{% static 'images/client-image1.png' %}" alt="client"></a>
+							<a href="#"><img src="{% static 'images/client-image2.png' %}" alt="client"></a>
+							<a href="#"><img src="{% static 'images/client-image3.png' %}" alt="client"></a>
+							<a href="#"><img src="{% static 'images/client-image4.png' %}" alt="client"></a>
+							<a href="#"><img src="{% static 'images/client-image5.png' %}" alt="client"></a>
+						</div>
+					</div><!--image-holder-->
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="featured-books" class="py-5 my-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="section-header align-center">
+						<div class="title">
+							<span>Some quality items</span>
+						</div>
+						<h2 class="section-title">All Books</h2>
+					</div>
+
+					<div class="product-list" data-aos="fade-up">
+						<div class="row">
+							{% for book in carousel_books %}
+							<div class="col-md-3">
+								<div class="product-item">
+									<figure class="product-style">
+										<img src="{{book.book_photo.url}}" alt="Books" class="product-item" style="width:288px;height:390px;">
+									</figure>
+									<figcaption>
+										<h3>{{book.title}}</h3>
+										<span>{{book.authors_name}}</span>
+									</figcaption>
+								</div>
+							</div>
+							{% endfor %}
+
+						</div><!--ft-books-slider-->
+					</div><!--grid-->
+
+
+				</div><!--inner-content-->
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="btn-wrap align-right">
+						<a href="log" class="btn-accent-arrow">View all Books <i
+								class="icon icon-ns-arrow-right"></i></a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="top_rated" class="leaf-pattern-overlay" style="background:#EDEBE4;padding:20px 0;background-image: url({% static 'images/leaf.png' %}) !important">
+		<div class="corner-pattern-overlay"></div>
+		<div class="container">
+			<div class="row justify-content-center"  style="position:relative;top:20px;">
+
+				<div class="col-md-8">
+
+					<div class="row">
+
+						{% if top_book %}
+							<div class="col-md-6">
+								<figure class="products-thumb">
+									{% if top_book.book.book_photo %}
+										<img style="height: 513px;" src="{{top_book.book.book_photo.url}}" alt="book" class="single-image">
+									{% else %}
+										<h4>no photo</h4>
+									{% endif %}
+								</figure>
+							</div>
+						{% endif %}
+
+						<div class="col-md-6">
+							<div class="product-entry">
+								<h2 class="section-title divider">Top Rated Book</h2>
+
+								<div class="products-content">
+									{% if top_book %}
+										<div class="author-name">By {{top_book.book.authors_name}}</div>
+										<h3 class="item-title">{{top_book.book.title}}</h3>
+										<p style="text-align: justify;height:250px;width:400px;display: -webkit-box;
+										-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;text-overflow: ellipsis;
+										max-height: calc(1.2em * 3);line-height: 1.2em;">{{top_book.book.description}}</p>
+	<!--									<div class="item-price">$ 45.00</div>-->
+										<div class="btn-wrap">
+											<a href="log" class="btn-accent-arrow">Add To List <i
+													class="icon icon-ns-arrow-right"></i></a>
+										</div>
+									{% else %}
+										 <h3 class="text-center">No Books Published.</h3>
+									{% endif %}
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+					<!-- / row -->
+
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<section id="quotation" class="align-center pb-0 mb-5">
+		<div class="inner-content" style="margin-top: 50px;">
+			<h2 class="section-title divider">Quote of the day</h2>
+			<blockquote data-aos="fade-up">
+				<q>“The more that you read, the more things you will know. The more that you learn, the more places
+					you’ll go.”</q>
+				<div class="author-name">Dr. Seuss</div>
+			</blockquote>
+		</div>
+	</section>
+
+	<section id="subscribe">
+		<div class="container">
+			<div class="row justify-content-center">
+
+				<div class="col-md-8">
+					<div class="row">
+
+						<div class="col-md-6">
+							<div class="title-element">
+								<h2 class="section-title divider">Subscribe to our newsletter</h2>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+
+							<div class="subscribe-content" data-aos="fade-up">
+								<p>Sed eu feugiat amet, libero ipsum enim pharetra hac dolor sit amet, consectetur. Elit
+									adipiscing enim pharetra hac.</p>
+								<form id="form">
+									<input type="text" name="email" placeholder="Enter your email addresss here">
+									<button class="btn-subscribe">
+										<span>send</span>
+										<i class="icon icon-send"></i>
+									</button>
+								</form>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<section id="Reviews" class="py-5 my-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="section-header align-center">
+						<div class="title">
+							<span>Read Reviews</span>
+						</div>
+						<h2 class="section-title">Latest Reviews</h2>
+					</div>
+					<br>
+					<div class="row">
+						{% if latest_review %}
+							{% for item in latest_review %}
+								<div class="col-md-4">
+									<div class="review-item" id="rev" style="min-height:300px;background:#efefef;position:relative;">
+										<div class="user_dp" style="width:90px;height:90px;border-radius:50%;background:red;position:absolute;top:-45px;left:calc(50% - 45px);">
+											<img style="width:90px;height:90px;border-radius:50%;object-fit:cover;" src="{{item.all_user.user_photo.url}}">
+										</div>
+										<br><br>
+										<p class="fs-5 text-center m-0 p-0" style="text-transform:uppercase;">{{item.book.title}}</p>
+										<div style="display:flex;justify-content:center;padding: 10px 0;"><img src="{% static 'images/chocolat/quotes-gray.png' %}"></div>
+										<div style="position:relative;text-align:justify;width:80%;margin:0 auto;display: -webkit-box;
+												-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;
+												text-overflow: ellipsis;max-height: calc(1.5em * 3);line-height: 1.5em;">
+											<span style="display:contents;">{{item.reviews.review}}</span></div>
+										<p style="width:80%;margin:0 auto;text-align:right;padding: 10px 0px;">~ {{item.reviews.name}}</p>
+									</div>
+								</div>
+							{% endfor %}
+						{% else %}
+							<h2 class="text-center">Currently, No Reviews</h2>
+						{% endif %}
+					</div>
+					<br>
+					<div class="row">
+
+						<div class="btn-wrap align-center">
+							<a href="log" class="btn btn-outline-accent btn-accent-arrow" tabindex="0">Read All Reviews<i
+									class="icon icon-ns-arrow-right"></i></a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+<!--	<section id="download-app" class="leaf-pattern-overlay">-->
+<!--		<div class="corner-pattern-overlay"></div>-->
+<!--		<div class="container">-->
+<!--			<div class="row justify-content-center">-->
+<!--				<div class="col-md-8">-->
+<!--					<div class="row">-->
+
+<!--						<div class="col-md-5">-->
+<!--							<figure>-->
+<!--								<img src="{% static 'images/device.png' %}" alt="phone" class="single-image">-->
+<!--							</figure>-->
+<!--						</div>-->
+
+<!--						<div class="col-md-7">-->
+<!--							<div class="app-info">-->
+<!--								<h2 class="section-title divider">Download our app now !</h2>-->
+<!--								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus-->
+<!--									liberolectus nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna.-->
+<!--									Adipiscing fames semper erat ac in suspendisse iaculis.</p>-->
+<!--								<div class="google-app">-->
+<!--									<img src="{% static 'images/google-play.jpg' %}" alt="google play">-->
+<!--									<img src="{% static 'images/app-store.jpg' %}" alt="app store">-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</section>-->
+
+	<footer id="footer">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-4">
+
+					<div class="footer-item">
+						<div class="company-brand">
+							<img src="{% static 'images/main-logo.png' %}" alt="logo" class="footer-logo">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus liberolectus
+								nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna. Adipiscing fames
+								semper erat ac in suspendisse iaculis.</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>About Us</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">vision</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">articles </a>
+							</li>
+							<li class="menu-item">
+								<a href="#">careers</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">service terms</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">donate</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Discover</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Books</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Authors</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Subjects</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Advanced Search</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>My account</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Sign In</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">View Cart</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">My Wishtlist</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Track My Order</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Help</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Help center</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Report a problem</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Suggesting edits</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Contact us</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- / row -->
+
+		</div>
+	</footer>
+
+	<div id="footer-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="copyright">
+						<div class="row">
+
+							<div class="col-md-6">
+								<p>© 2022 All rights reserved.</p>
+							</div>
+
+							<div class="col-md-6">
+								<div class="social-links align-right">
+									<ul>
+										<li>
+											<a href="#"><i class="icon icon-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-twitter"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-youtube-play"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-behance-square"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</div><!--grid-->
+
+				</div><!--footer-bottom-content-->
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<script src="{% static 'js/plugins.js' %}"></script>
+	<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            height: 100%;
+<!--            overflow: hidden;-->
+            box-sizing: border-box;
+        }
+        body{
+            background-image: url('{% static "images/vanilla/loginPhoto.jpg" %}');
+            background-position: center 95%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+            overflow-y:auto;
+            height: 100vh;
+        }
+        ::placeholder{
+            font-size: 14px;
+        }
+        .inp:focus::placeholder{
+            color: transparent;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        label{
+            position: relative;
+            right: 3px;
+        }
+        form{
+            display: contents;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'icomoon/icomoon.css' %}">-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/vendor.css' %}">-->
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+    <!--    INTERNAL SCRIPTS-->
+    <script>
+        window.onload = function(){
+            {% if messages %}
+                {% for message in messages %}
+                    alert("{{message|escapejs}}");
+                {% endfor %}
+            {% endif %}
+        };
+    </script>
+</head>
+<body>
+<section class="loginForm">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="form d-flex align-items-center justify-content-center" style="min-height: 500px;position:relative;top:50px">
+                    <div class="container" style="line-height: 0.7rem;">
+                        <h1 class="text-center m-0" style="font-family: arial;font-weight: 600;letter-spacing: 5px;">SIGN UP</h1><br><br>
+                        <form method="post" action="publisherinfo" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>NAME</label>
+                                        <input name="name" class="form-control form-control-lg inp" type="text" placeholder="NAME">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>PHONE</label>
+                                        <input name="phone" class="form-control form-control-lg inp" type="text" placeholder="PHONE NUMBER">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>EMAIL</label>
+                                        <input name="mail" required class="form-control form-control-lg inp" type="text" placeholder="EMAIL">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>BUSINESS TYPE</label>
+                                        <input name="bs_type" class="form-control form-control-lg inp" type="text" placeholder="BUISINESS TYPE">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>COMPANY NAME</label>
+                                        <input name="cmp_name" class="form-control form-control-lg inp" type="text" placeholder="COMPANY NAME">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6" style="display: flex;flex-direction:column;gap:10px;">
+                                    <label>GENDER:</label>
+                                    <div class="form-group">
+
+                                        <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
+                                              <label class="form-check-label" for="inlineRadio1" style="position:relative;bottom:-6px">MALE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female">
+                                              <label class="form-check-label" for="inlineRadio2" style="position:relative;bottom:-6px">FEMALE</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>USERNAME</label>
+                                        <input name="username" class="form-control form-control-lg inp" type="text" placeholder="USERNAME">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="formFile" class="form-label">CHOOSE A PROFILE</label>
+                                        <input accept="image/*" name="photo" class="form-control form-control-lg" type="file" id="formFile" style="position:relative;bottom:10px;">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>PASSWORD</label>
+                                        <input name="password" class="form-control form-control-lg inp" type="text" placeholder="PASSWORD">
+                                    </div>
+                                </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>CONFIRM PASSWORD</label>
+                                        <input name="conf_password" class="form-control form-control-lg inp" type="text" placeholder="CONFIRM PASSWORD">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                         <input type="submit" class="form-control form-control-lg " style="background:#a52a2ab5;color:white;letter-spacing: 7px;font-weight: 600;" value="SIGN UP">
+                                    </div>
+                                </div>
+                                <p style="color:grey;position:relative;bottom:15px;margin: 0;">already have an account?&nbsp;<a href="publisherlog">Login</a></p>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

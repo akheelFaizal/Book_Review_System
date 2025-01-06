@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            height:100%;
+            overflow:hidden;
+        }
+        body{
+            background-image: url('{% static "images/vanilla/loginPhoto.jpg" %}');
+            background-position: center 95%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+            overflow-y:auto;
+            height: 100vh;
+        }
+        ::placeholder{
+            font-size: 15px;
+        }
+        .inp:focus::placeholder{
+            color: transparent;
+        }
+         label{
+            position: relative;
+            right: 3px;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        form{
+            display: contents;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'icomoon/icomoon.css' %}">-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/vendor.css' %}">-->
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+<!--    INTERNAL SCRIPTS-->
+    <script>
+    window.onload = function(){
+        {% if messages %}
+            {% for message in messages %}
+                alert("{{message|escapejs}}");
+            {% endfor %}
+        {% endif %}
+    };
+    </script>
+</head>
+<body>
+<section class="loginForm">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="form d-flex align-items-center justify-content-center" style="min-height: 500px;position:relative;top:70px">
+                    <div class="container">
+                        <h1 class="text-center m-0" style="font-family: arial;font-weight: 600;letter-spacing: 5px;">SIGN UP</h1><br>
+                        <form method="post" action="userinfo" enctype="multipart/form-data">
+                         {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>NAME</label>
+                                    <input class="form-control form-control-lg inp" type="text" placeholder="NAME" name="name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>PHONE</label>
+                                    <input class="form-control form-control-lg inp" type="text" placeholder="PHONE NUMBER" name="phone">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>EMAIL</label>
+                                    <input class="form-control form-control-lg inp" required type="text" placeholder="EMAIL" name="mail">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>USERNAME</label>
+                                    <input class="form-control form-control-lg inp" type="text" placeholder="USERNAME" name="username">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>PASSWORD</label>
+                                    <input class="form-control form-control-lg inp" type="password" placeholder="PASSWORD" name="password">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>CONFIRM PASSWORD</label>
+                                    <input class="form-control form-control-lg inp" type="password" placeholder="CONFIRM PASSWORD" name="conf_password">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Choose a Photo</label>
+                                    <input accept="image/*" class="form-control form-control-lg inp m-0" type="file" placeholder="CONFIRM PASSWORD" name="pic">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>GENDER:</label>
+                                <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
+                                      <label class="form-check-label" for="inlineRadio1" style="position:relative;bottom:3px">MALE</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female">
+                                      <label class="form-check-label" for="inlineRadio2" style="position:relative;bottom:3px">FEMALE</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                     <input type="submit" class="form-control form-control-lg " style="background:#a52a2ab5;color:white;letter-spacing: 7px;font-weight: 600;" value="SIGN UP">
+                                </div>
+                            </div>
+                            <p style="color:grey;position:relative;bottom:20px;">already have an account?&nbsp;<a href="log">Login</a></p>
+
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

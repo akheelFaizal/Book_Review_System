@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>User Login</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            height:100%;
+            overflow: hidden;
+        }
+        body{
+            background-image: url('{% static "images/vanilla/loginPhoto.jpg" %}');
+            background-position: center 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x:hidden;
+        }
+        ::placeholder{
+            font-size: 15px;
+        }
+        .inp:focus::placeholder{
+            color: transparent;
+        }
+        form{
+            display: contents;
+        }
+
+    </style>
+    <script>
+        window.onload = function(){
+            {% if messages %}
+                {% for message in messages %}
+                    alert("{{message|escapejs}}");
+                {% endfor %}
+            {% endif %}
+        };
+    </script>
+    <script>
+          function DisableBackButton() {
+               window.history.forward()
+          }
+          DisableBackButton();
+          window.onclick = DisableBackButton;
+          window.onpageshow = function(evt) { if (evt.persisted) DisableBackButton() }
+          window.onunload = function() { void (0) }
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'icomoon/icomoon.css' %}">-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/vendor.css' %}">-->
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+<section class="loginForm">
+    <div class="container-fluid px-0">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="form d-flex align-items-center justify-content-center" style="min-height: 500px;position:relative;top:100px">
+                    <form method="post" action="loginaction">
+                        {% csrf_token %}
+                        <div class="container">
+                            <h1 class="text-center m-0" style="font-family: arial;font-weight: 600;letter-spacing: 5px;">USER-LOGIN</h1><br>
+                            <div class="row d-flex align-items-center justify-content-center">
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="height:48px;"><i class="bi bi-person fs-4"></i></span>
+                                            <input class="form-control form-control-lg inp" type="text" placeholder="USERNAME" name="mail">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="height:48px;"><i class="bi bi-shield-lock fs-4"></i></span>
+                                            <input class="form-control form-control-lg inp" type="password" placeholder="PASSWORD" name="password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                         <input type="submit" class="form-control form-control-lg " style="background:#a52a2ab5;color:white;letter-spacing: 7px;font-weight: 600;" value="LOGIN">
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <label class="text-center">OR</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                       <a href="usersign" class="form-control btn" style="margin:10px 0;height: 41.7px;background:#a52a2ab5;color:white;letter-spacing: 7px;font-weight: 600;font-size:15px;">SIGN UP</a>
+                                    </div>
+                                </div>
+                               <div class="col-md-7" style="line-height: 10px;">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="adminlog">ADMIN</a></li>
+                                        <li class="breadcrumb-item"><a href="publisherlog">PUBLISHER</a></li>
+                                    </ol>
+                               </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

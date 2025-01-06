@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	{% load static %}
+	<title>Copyrights</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'icomoon/icomoon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/vendor.css' %}">
+	<style>
+		body{
+			position: relative;
+		}
+		.social-links ul li:hover{
+			transform:translateY(-5px);
+			transition:0.2s;
+		}
+		.social-links ul li{
+			transition:0.2s;
+		}
+		.sort ul{
+			list-style-type: none;
+			display: flex;
+			gap: 70px;
+			justify-content: center;
+			align-items: center;
+		}
+		#logoutbutton:hover{
+			color:white;
+		}
+		#logoutbutton:hover::after {
+			width: 100%;
+		}
+		#logoutbutton {
+			position: relative;
+			overflow: hidden;
+			transition: 0.2s;
+			color: black;
+		}
+
+		#logoutbutton::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 0;
+			height: 100%;
+			background-color: #daa556;
+			transition: 0.3s;
+			z-index: -1;
+		}
+
+		#logoutbutton:hover::after {
+			width: 100%;
+		}
+
+		#logoutbutton:hover {
+			color: white;
+		}
+		.allBooks{
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10vh;
+			padding-left: 2vh;
+			box-sizing: border-box;
+		}
+		.books{
+			width: 219px;
+			height: 317px;
+			overflow: hidden;
+			position: relative;
+		}
+		.books img{
+			object-fit: cover;
+			 object-position: center center;
+			width: 100%;
+			height: 100%;
+		}
+		.bookdetails{
+			width: 100%;
+			height: 0px;
+			background: #000000b0;
+			position: absolute;
+			bottom: 0;
+			transition: 0.5s;
+			z-index: 2;
+
+		}
+		.books:hover .bookdetails{
+			height: 130px;
+			transition: 0.5s;
+		}
+		.bookdetails p{
+			margin: 0;
+			font-size:13px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.bookdetails p:nth-child(1){
+			background: #daa566;
+			letter-spacing:1px;
+			font-weight: 700;
+		}
+		.books::after{
+			content: '';
+			position: absolute;
+			inset: 0;
+			z-index:1;
+			background:#000000b0;
+			display: none;
+		}
+		.books:hover::after{
+			display: block;
+		}
+		.books .manage span{
+			position: absolute;
+			right: 10px;
+			font-size: 21px;
+			z-index:3;
+			color: white;
+		}
+		.books .manage span:nth-child(2){
+			position: absolute;
+			right: 45px;
+			top: -2px;
+			z-index:3;
+			color: white;
+		}
+		.books .manage{
+			display: none;
+		}
+		.books:hover .manage{
+			display: block;
+		}
+		.editsecwrap{
+			position: absolute;
+			inset: 0;
+			height: 100vh !important;
+			background: #000000bd;
+			z-index: 1031;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			display: none;
+		}
+		.editSection{
+			display: flex;
+			width:700px;
+		}
+		.imageSection{
+			flex: 1.5;
+			position: relative;
+		}
+		.imageSection img{
+			width: 100%;
+			height: 100%;
+
+		}
+		.detailsSection{
+			flex:2;
+			background: white;
+			padding-top: 25px;
+			box-sizing: border-box;
+		}
+		.detailsSection input,textarea{
+			margin: 5px !important;
+			padding:10px !important;
+		}
+		.closeeditsection{
+		    position: absolute;
+			top: -55px;
+			right: -10px;
+			font-size: 40px;
+			color: white;
+		}
+		.closeeditsection:hover{
+			color: red;
+		}
+		.editBook{
+			position: relative;
+		}
+		
+	</style>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+	<!--	messages and disable back button-->
+	<script>
+        window.onload = function(){
+            {% if messages %}
+                {% for message in messages %}
+                    alert("{{message|escapejs}}");
+                {% endfor %}
+            {% endif %}
+        };
+    </script>
+    <script>
+          function DisableBackButton() {
+               window.history.forward()
+          }
+          DisableBackButton();
+          window.onclick = DisableBackButton;
+          window.onpageshow = function(evt) { if (evt.persisted) DisableBackButton() }
+          window.onunload = function() { void (0) }
+    </script>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+
+	<div id="header-wrap">
+
+		<div class="top-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="social-links">
+							<ul>
+								<li>
+									<a href="#"><i class="icon icon-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-youtube-play"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-behance-square"></i></a>
+								</li>
+							</ul>
+						</div><!--social-links-->
+					</div>
+					<div class="col-md-6">
+						<div class="right-element">
+							<div class="action-menu">
+								<div class="search">
+									<form method="GET" action="" style="display: contents;margin:0;">
+										{% csrf_token %}
+										<input type="search" name="searchInput" placeholder="Search for a book">
+										<button style="height:44px;position:relative;top:-2px;" class="btn btn-primary m-0" type="submit">Search</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div><!--top-content-->
+
+		<header id="header">
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-md-2">
+						<div class="main-logo">
+							<a href="index.html"><img src="{% static 'images/main-logo.png' %}" alt="logo"></a>
+						</div>
+
+					</div>
+
+					<div class="col-md-10">
+
+						<nav id="navbar">
+							<div class="main-menu stellarnav">
+								<ul class="menu-list">
+									<li class="menu-item"><a href="publishhome">Home</a></li>
+
+									<li class="menu-item"><a href="logout" class="nav-link"><button id="logoutbutton" style="padding:7px 10px;margin:0;height:auto;border: 2px solid #daa556;" class="btn">LOGOUT</button></a></li>
+<!--								<li class="menu-item"><a href="#download-app" class="nav-link">Download App</a></li>-->
+								</ul>
+
+								<div class="hamburger">
+									<span class="bar"></span>
+									<span class="bar"></span>
+									<span class="bar"></span>
+								</div>
+
+							</div>
+						</nav>
+
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="sort">
+							<ul>
+								<li><a href="?sort=recent" class="text-dark">Recent</a></li>
+								<li><a href="?sort=top_rated" class="text-dark">Top Rated</a></li>
+								<li><a href="?sort=least_rated" class="text-dark">Least Rated</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<nav class="books-published-by-pubisher">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="allBooks">
+							{% if books_with_ratings %}
+								{% for i in books_with_ratings %}
+								<div class="books">
+									<div class="manage">
+										<span><a href="copyright/{{i.book.id}}" class="plusIcon" style="color: white;">
+											<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
+												<path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0
+												1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091
+												0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029
+												2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512"/>
+											</svg>
+										</a></span>
+
+									</div>
+									{% if i.book.book_photo %}
+									<img src="{{ i.book.book_photo.url }}">
+									{% else %}
+										<img src="{% static '/images/product-item1.jpg' %}">
+									{% endif %}
+									<div class="bookdetails">
+										<p class="text-center text-light p-0" style="text-transform: uppercase;">{{i.book.title}}</p>
+										<p class="text-center text-light p-0" style="text-transform: uppercase;">{{i.book.authors_name}}</p>
+										<p class="text-center text-light p-0" style="text-transform: uppercase;">{{i.book.genre}}</p>
+										<p class="text-center text-light p-0" style="text-transform: uppercase;position:relative;bottom:10px;font-size:16px;">{{i.average_rating}}<span style="color: gold; font-size: 24px;position:relative;top:1px;left:3px;">&#9733;</span></p>
+									</div>
+								</div>
+								{% endfor %}
+							{% else %}
+								<div class="allbooksmessage" style="margin:0 auto;">
+									<h2>No Books</h2>
+								</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</nav>
+	</div>
+	<!--header-wrap-->
+
+
+
+
+
+	<footer id="footer">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-4">
+
+					<div class="footer-item">
+						<div class="company-brand">
+							<img src="{% static 'images/main-logo.png' %}" alt="logo" class="footer-logo">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus liberolectus
+								nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna. Adipiscing fames
+								semper erat ac in suspendisse iaculis.</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>About Us</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">vision</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">articles </a>
+							</li>
+							<li class="menu-item">
+								<a href="#">careers</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">service terms</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">donate</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Discover</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Books</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Authors</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Subjects</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Advanced Search</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>My account</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Sign In</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">View Cart</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">My Wishtlist</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Track My Order</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Help</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Help center</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Report a problem</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Suggesting edits</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Contact us</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- / row -->
+
+		</div>
+	</footer>
+
+	<div id="footer-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="copyright">
+						<div class="row">
+
+							<div class="col-md-6">
+								<p>© 2022 All rights reserved.</p>
+							</div>
+
+							<div class="col-md-6">
+								<div class="social-links align-right">
+									<ul>
+										<li>
+											<a href="#"><i class="icon icon-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-twitter"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-youtube-play"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-behance-square"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</div><!--grid-->
+
+				</div><!--footer-bottom-content-->
+			</div>
+		</div>
+	</div>
+
+
+<!--	SCRIPTS-->
+	<script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<script src="{% static 'js/plugins.js' %}"></script>
+	<script src="{% static 'js/script.js' %}"></script>
+<!--	SCRIPTS-->
+
+</body>
+
+</html>

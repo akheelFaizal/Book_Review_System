@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>copyrights</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'icomoon/icomoon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/vendor.css' %}">
+    <style>
+        body{
+            background-image: url('{% static "images/vanilla/loginPhoto.jpg" %}');
+            background-position: center 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x:hidden;
+        }
+        .form1,
+        .form2,
+        .form3,
+        .form4{
+            position:relative;
+        }
+        .form1::after,
+        .form2::after,
+        .form3::after,
+        .form4::after{
+            content:'';
+            position:absolute;
+            inset:0;
+            background:rgba(0, 0, 0, 0.1);
+            z-index:-1;
+            backdrop-filter: blur(20px);
+        }
+        input:focus::placeholder{
+            color:transparent;
+        }
+    </style>
+    <script>
+		window.addEventListener("DOMContentLoaded",()=>{
+			const fileopentrigger = document.querySelector('.signature')
+			const fileinput = document.querySelector('.signatureinput')
+			fileopentrigger.addEventListener('click', () => {
+				fileinput.click();
+			});
+
+
+		});
+
+	</script>
+    <script>
+        window.addEventListener("DOMContentLoaded",()=>{
+			const fileopentrigger = document.querySelector('.document')
+			const fileinput = document.getElementById('document')
+			fileopentrigger.addEventListener('click', () => {
+				fileinput.click();
+			});
+		});
+
+    </script>
+    <script>
+	window.addEventListener("DOMContentLoaded", () => {
+		const fileInput = document.querySelector('.signatureinput');
+		if (fileInput) {
+			console.log('Input field found');
+		} else {
+			console.log('Input field not found');
+		}
+
+		fileInput.addEventListener('change', function(event) {
+			if (event.target.files && event.target.files.length > 0) {
+				const selectedFile = event.target.files[0];
+				const fileName = selectedFile.name;
+                console.log(selectedFile)
+				const label = document.querySelector('.signatureLabel');
+				if (label) {
+					label.innerHTML = fileName;
+				}
+			}
+		});
+	});
+    </script>
+    <script>
+	window.addEventListener("DOMContentLoaded", () => {
+		const fileInput = document.getElementById('document');
+		if (fileInput) {
+			console.log('Input field found');
+		} else {
+			console.log('Input field not found');
+		}
+
+		fileInput.addEventListener('change', function(event) {
+			if (event.target.files && event.target.files.length > 0) {
+				const selectedFile = event.target.files[0];
+				const fileName = selectedFile.name;
+                console.log(selectedFile)
+				const label = document.querySelector('.doc');
+				if (label) {
+					label.innerHTML = fileName;
+				}
+			}
+		});
+	});
+</script>
+
+</head>
+<body style="min-height:100vh;">
+    <div class="container" style="display:flex;justify-content:center;align-items:center;min-height:100vh;">
+        <form method="post" action="/requestremoval" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="formSection" style="width:500px;height:auto;background:transparent;position:relative;">
+                <a href="/pubcopyrights"><span style="position:absolute;right:-35px;top:-15px;z-index:2000;color:red;"><i class="fs-2 bi bi-x"></i></span></a>
+                <div class="row" style="display:flex;overflow:hidden;flex-wrap:nowrap;">
+                    <div class="col-md-12" id="firstpage">
+                        <div class="form1" style="min-height:auto;background:transparent;">
+                            <h2 class="text-center p-2">Book Details</h2>
+                            <hr style="margin: 15px auto;width: 90%;">
+                            <div class="row g-3 p-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input name="title" value="{{book.title}}" readonly class="form-control" type="text" placeholder="BOOK TITLE">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input name="b_id" value="{{book.id}}" readonly class="form-control" type="text" placeholder="BOOK ID">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input name="pub_name" value="{{book.name}}" readonly class="form-control" type="text" placeholder="PUBLISHER NAME">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input name="date" value="{{book.published_date}}" readonly class="form-control" type="date" placeholder="PUBLISHER DATE">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <a href="#secondpage" class="form-control text-center" style="text-decoration:none;letter-spacing:3px;font-weight:700;">
+                                            NEXT</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="secondpage">
+                        <div class="form2" style="min-height:auto;">
+                            <h2 class="text-center p-2">Your Details</h2>
+                            <hr style="margin: 15px auto;width: 90%;">
+                            <div class="row g-3 p-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input name="user_name" class="form-control" type="text" placeholder="NAME">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input name="email" class="form-control" type="text" placeholder="EMAIL">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input name="phone" class="form-control" type="text" placeholder="PHONE NUMBER">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <a href="#thirdpage" class="form-control text-center" style="text-decoration:none;letter-spacing:3px;font-weight:700;">
+                                            NEXT</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="thirdpage">
+                        <div class="form3" style="min-height:auto;">
+                            <h2 class="text-center p-2">Reason For Removal</h2>
+                            <hr style="margin: 15px auto;width: 90%;">
+                            <div class="row g-3 p-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea name="reason" class="form-control" placeholder="REASON"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <a href="#fourthpage" class="form-control text-center" style="text-decoration:none;letter-spacing:3px;font-weight:700;">
+                                            NEXT</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="fourthpage">
+                        <div class="form4" style="min-height:auto;">
+                            <h2 class="text-center p-2">Declaration</h2>
+                            <hr style="margin: 15px auto;width: 90%;">
+                            <div class="row g-3 p-4">
+                                <div class="col-md-12">
+                                    <p style="text-align:justify;">I hereby declare that I am the rightful publisher or owner of the above-mentioned book and request
+                                        its removal from the system. The information provided is accurate to the best of my knowledge.
+                                        <input name="declaration" value="signed" type="checkbox" style="position: relative;left: 10px;top: 1px;"></p>
+
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input accept="image/*" name="signature" class="form-control d-none signatureinput" type="file" id="signature">
+                                        <label for="signature" class="signatureLabel">Upload Your Signature.</label>
+                                        <img class="signature" style="position:relative;left:15px;bottom:2px;" src="{% static 'images/chocolat/attachIcon.png' %}">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input name="document" class="form-control d-none" type="file" id="document">
+                                        <label for="document" class="doc">Upload Document Of Ownership.</label>
+                                        <img class="document" style="position:relative;left:15px;bottom:2px;" src="{% static 'images/chocolat/attachIcon.png' %}">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="submit" class="form-control text-center" value="NEXT" style="letter-spacing:3px;font-weight:700;">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+<!--	SCRIPTS-->
+	<script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<script src="{% static 'js/plugins.js' %}"></script>
+	<script src="{% static 'js/script.js' %}"></script>
+<!--	SCRIPTS-->
+</body>
+</html>

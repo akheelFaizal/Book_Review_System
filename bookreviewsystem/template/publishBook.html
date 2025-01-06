@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            height: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        body{
+            background-image: url('{% static "images/vanilla/loginPhoto.jpg" %}');
+            background-position: center 95%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+            overflow-y:auto;
+            height: 100vh;
+        }
+        ::placeholder{
+            font-size: 14px;
+        }
+        .inp:focus::placeholder{
+            color: transparent;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        label{
+            position: relative;
+            right: 3px;
+            text-transform: uppercase;
+        }
+        form{
+            display: contents;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'icomoon/icomoon.css' %}">-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/vendor.css' %}">-->
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+    <!--    INTERNAL SCRIPTS-->
+    <script>
+        window.onload = function(){
+            {% if messages %}
+                {% for message in messages %}
+                    alert("{{message|escapejs}}");
+                {% endfor %}
+            {% endif %}
+        };
+    </script>
+</head>
+<body>
+<section class="loginForm">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="form d-flex align-items-center justify-content-center" style="min-height: 500px;position:relative;top:50px">
+                    <div class="container" style="line-height: 0.7rem;">
+                        <h1 class="text-center m-0" style="font-family: arial;font-weight: 600;letter-spacing: 5px;">PUBLISH A BOOK</h1><br><br>
+                        <form method="post" action="addbookactn" enctype="multipart/form-data">
+                            {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Publisher Name</label>
+                                    <input name="name" class="form-control form-control-lg inp" type="text" placeholder="NAME">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>E-Mail</label>
+                                    <input name="mail" readonly value="{{mail}}" class="form-control form-control-lg inp" type="text" placeholder="E-MAIL">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Author's Name</label>
+                                    <input name="authorname" required class="form-control form-control-lg inp" type="text" placeholder="AUTHOR's NAME">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input name="title" class="form-control form-control-lg inp" type="text" placeholder="TITLE">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Genre</label>
+                                    <input name="genre" class="form-control form-control-lg inp" type="text" placeholder="GENRE">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Published Date</label>
+                                    <input name="date" class="form-control form-control-lg inp" type="date" placeholder="DATE">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="formFile" class="form-label">Cover Image</label>
+                                    <input accept="image/*" name="photo" class="form-control form-control-lg" type="file" id="formFile" style="position:relative;bottom:10px;background:#64758f8a;">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="desc" class="form-control inp" placeholder="DESCRIPTION"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                     <input type="submit" class="form-control form-control-lg " style="background:#a52a2ab5;color:white;letter-spacing: 7px;font-weight: 600;" value="PUBLISH">
+                                </div>
+                            </div>
+
+                            <p style="color:#2b2525b3;position:relative;bottom:15px;margin: 0;">want to go home?&nbsp;<a href="publishhome" style="color:#2b2525b3;text-decoration:underline;">home</a></p>
+
+
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
